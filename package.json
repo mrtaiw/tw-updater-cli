@@ -1,0 +1,37 @@
+{
+	"name": "tw-updater-cli",
+	"version": "1.0.0",
+	"description": "A command line tool for updating the expo app",
+	"main": "./dist/index.js",
+	"bin": {
+		"tw-updater": "./dist/index.js"
+	},
+	"scripts": {
+		"build": "npx tsc",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [
+		"cli",
+		"expo",
+		"updater"
+	],
+	"author": "MrTaiw <mrtaiw@gmail.com> (https://mrtaiw.dev)",
+	"repository": "https://github.com/mrtaiw/tw-updater-cli",
+	"license": "ISC",
+	"packageManager": "pnpm@10.7.1",
+	"dependencies": {
+		"archiver": "^7.0.1",
+		"axios": "^1.8.4",
+		"chalk": "^5.4.1",
+		"commander": "^13.1.0",
+		"dotenv": "^16.4.7",
+		"form-data": "^4.0.2",
+		"inquirer": "^12.5.2",
+		"@expo/config": "^10.0.11",
+		"ora": "^8.2.0"
+	},
+	"devDependencies": {
+		"@types/node": "^22.14.0",
+		"typescript": "^5.8.3"
+	}
+}
