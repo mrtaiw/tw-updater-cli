@@ -1,6 +1,6 @@
 {
 	"name": "tw-updater-cli",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"description": "A command line tool for updating the expo app",
 	"main": "./dist/index.js",
 	"bin": {
@@ -17,7 +17,7 @@
 	],
 	"author": "MrTaiw <mrtaiw@gmail.com> (https://mrtaiw.dev)",
 	"repository": "https://github.com/mrtaiw/tw-updater-cli",
-	"license": "ISC",
+	"license": "MIT",
 	"packageManager": "pnpm@10.7.1",
 	"dependencies": {
 		"archiver": "^7.0.1",
