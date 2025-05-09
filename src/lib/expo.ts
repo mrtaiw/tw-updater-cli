@@ -14,7 +14,7 @@ export const getExpoBundle = async (
 
 	try {
 		await execAsync("npx expo export --platform " + platform, verbose);
-		const bundle = "./dist/update-" + exp.version + ".zip";
+		const bundle = "./update-" + exp.version + ".zip";
 		await compress(bundle, "./dist");
 		return {
 			bundle,

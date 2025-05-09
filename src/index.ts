@@ -6,6 +6,7 @@ import ora from "ora";
 import { login, isLoggedIn, getToken } from "./lib/auth";
 import { uploadFile } from "./lib/upload";
 import { generateRelease } from "./lib/release";
+import * as fs from "fs";
 
 program
 	.name("tw-updater-cli")
@@ -36,7 +37,8 @@ program
 	.option("-n, --note <note>", "Changelog", "")
 	.option("-a, --account <account>", "Profile", "default")
 	.option("-v, --verbose", "Enable verbose logging")
-	.action(async ({ platform, note, verbose, account }) => {
+	.option("-k, --keep", "Keep bundle after upload")
+	.action(async ({ platform, note, verbose, account, keep }) => {
 		console.log(chalk.blue("Using profile:"), chalk.yellow(account));
 
 		if (!isLoggedIn(account)) {
@@ -74,12 +76,19 @@ program
 						`✓ ${result.message || "File uploaded successfully!"}`
 					)
 				);
+
+				if (!keep && fs.existsSync(release.bundle)) {
+					fs.unlinkSync(release.bundle);
+				}
 			} else {
 				console.log(chalk.red("✗ File upload failed."));
 			}
 		} catch (error: any) {
 			uploadSpinner.stop();
 			console.error(chalk.red("Error during upload:"), error.message);
+			if (fs.existsSync(release.bundle)) {
+				fs.unlinkSync(release.bundle);
+			}
 		}
 	});
 
