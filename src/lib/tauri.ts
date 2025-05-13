@@ -12,6 +12,12 @@ export const getTauriBundle = async (
 			fs.readFileSync("./src-tauri/tauri.conf.json")
 		);
 
+		if (tauri.version === "../package.json") {
+			tauri.version = JSON.parse(
+				fs.readFileSync("./package.json")
+			).version;
+		}
+
 		const folderPath = "./src-tauri/target/release/bundle/nsis/";
 		const exeFile = getLastFileWithExtension(
 			folderPath,
