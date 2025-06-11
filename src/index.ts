@@ -11,7 +11,7 @@ import * as fs from "fs";
 program
 	.name("tw-updater-cli")
 	.description("A simple CLI tool with login and update")
-	.version("1.0.0");
+	.version(require("../package.json").version);
 
 program
 	.command("login")
