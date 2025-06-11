@@ -14,7 +14,10 @@ export const getExpoBundle = async (
 	});
 
 	try {
-		await execAsync("npx expo export --platform " + platform, verbose);
+		await execAsync(
+			"npx expo export --dump-sourcemap --platform " + platform,
+			verbose
+		);
 		const bundle = "./update-" + exp.version + ".zip";
 		fs.writeFileSync("./dist/expoConfig.json", JSON.stringify(exp));
 		await compress(bundle, "./dist");
