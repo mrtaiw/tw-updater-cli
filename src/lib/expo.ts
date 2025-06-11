@@ -2,6 +2,7 @@ import { Platform, Release } from "../types";
 import { compress, execAsync } from "./util";
 
 const { getConfig } = require("@expo/config");
+const fs = require("fs");
 
 export const getExpoBundle = async (
 	platform: Platform,
@@ -15,6 +16,7 @@ export const getExpoBundle = async (
 	try {
 		await execAsync("npx expo export --platform " + platform, verbose);
 		const bundle = "./update-" + exp.version + ".zip";
+		fs.writeFileSync("./dist/expoConfig.json", JSON.stringify(exp));
 		await compress(bundle, "./dist");
 		return {
 			bundle,
