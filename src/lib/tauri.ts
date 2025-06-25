@@ -18,17 +18,28 @@ export const getTauriBundle = async (
 			).version;
 		}
 
+		if (tauri.package.version) {
+			tauri.version = JSON.parse(
+				fs.readFileSync("./package.json")
+			).version;
+			tauri.identifier = tauri.tauri.bundle.identifier;
+		}
+
 		const folderPath = "./src-tauri/target/release/bundle/nsis/";
 		const exeFile = getLastFileWithExtension(
 			folderPath,
 			tauri.version + "_x64-setup.exe"
 		);
+
+		const bundleFiles = [
+			folderPath + exeFile,
+			folderPath + exeFile.replace(".exe", ".nsis.zip.sig"),
+			folderPath + exeFile.replace(".exe", ".nsis.zip"),
+		];
+
 		const bundle = "./dist/update-" + tauri.version + ".zip";
 		if (fs.existsSync(folderPath + exeFile)) {
-			await compress(bundle, null, [
-				folderPath + exeFile,
-				folderPath + exeFile + ".sig",
-			]);
+			await compress(bundle, null, bundleFiles);
 			return {
 				bundle,
 				version: tauri.version,

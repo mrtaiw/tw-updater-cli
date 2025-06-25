@@ -31,7 +31,7 @@ export const compress = (
 				archive.file(files, { name: files.split("/").pop() });
 			} else {
 				files.forEach((file: string) => {
-					const name = file.endsWith(".exe.sig")
+					const name = file.endsWith(".sig")
 						? "tauri.sig"
 						: file.split("/").pop();
 					archive.file(file, { name });
