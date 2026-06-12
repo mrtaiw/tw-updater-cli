@@ -22,9 +22,12 @@ jobs:
             - name: Install Node.js
               uses: actions/setup-node@v6
               with:
-                  node-version: 22
+                  node-version: 24
                   registry-url: https://registry.npmjs.org
                   package-manager-cache: false # never use caching in release builds
+
+            - name: Upgrade npm
+              run: npm install -g npm@latest
 
             - name: Install dependencies
               run: pnpm install --no-frozen-lockfile
@@ -34,4 +37,6 @@ jobs:
 
             - name: Publish 🚀
               shell: bash
+              env:
+                  NPM_CONFIG_PROVENANCE: true
               run: npm publish --access public --provenance

@@ -19,6 +19,10 @@
 	"repository": "https://github.com/mrtaiw/tw-updater-cli",
 	"license": "MIT",
 	"packageManager": "pnpm@10.7.1",
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
 	"dependencies": {
 		"archiver": "^7.0.1",
 		"axios": "^1.8.4",
