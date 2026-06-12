@@ -15,7 +15,7 @@ import { Release } from "../types";
  */
 const uploadFile = async (
 	release: Release,
-	token: string
+	token: string,
 ): Promise<AxiosResponse["data"] | null> => {
 	dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 	try {
@@ -37,6 +37,7 @@ const uploadFile = async (
 			headers: {
 				...form.getHeaders(),
 				Authorization: `Bearer ${token}`,
+				"User-Agent": "",
 			},
 		});
 
@@ -44,7 +45,7 @@ const uploadFile = async (
 			return response.data;
 		} else {
 			console.log(
-				chalk.red(`Upload failed with status: ${response.status}`)
+				chalk.red(`Upload failed with status: ${response.status}`),
 			);
 			return null;
 		}
